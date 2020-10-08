@@ -1,0 +1,6 @@
+name: 'faas-artillery-tutorial' ## --name argument
+env: 'production' ## --env argument
+scripts:
+  'thorium-artillery.yaml': ## --script argument
+    workers: 1 ## --workers argument
+    rounds: 1 ## --rounds argument

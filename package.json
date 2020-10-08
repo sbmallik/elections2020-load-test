@@ -1,0 +1,28 @@
+{
+  "name": "elections2020-load-test",
+  "version": "1.0.0",
+  "description": "Load testing code for thorium end-points for elections 2020.",
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "scripts": {
+    "getSecret": "vault read -field=key secret/quality-engineering/gcp/production/service-accounts/api-services-faas-artillery > keys/service-account.json",
+    "pullImage": "docker pull quay.io/gannett/faas-artillery:latest",
+    "build": "npm ci",
+    "test": "docker run --rm -v $(pwd)/keys:/keys -v $(pwd)/test:/test -e GOOGLE_APPLICATION_CREDENTIALS=/keys/service-account.json quay.io/gannett/faas-artillery:latest run --dir /test --config /test/thorium-artillery-config.yaml",
+    "localTest": "artillery run ./test/sample-artillery.yaml -e production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sbmallik/elections2020-load-test.git"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "eslint": "^4.19.1"
+  },
+  "devDependencies": {
+    "artillery": "",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-prettier": "^2.6.0"
+  }
+}

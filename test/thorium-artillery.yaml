@@ -1,0 +1,16 @@
+config:
+  target: https://usatoday.com # Endpoint to performance test
+  environments: # Environment the test is running
+    production:
+      phases:
+        - duration: 9 # The total test duration
+          arrivalRate: 3 # RPS
+scenarios:
+  - name: usatoday-home
+    flow:
+    - post:
+        url: /
+  - name: usatoday-sports
+    flow:
+    - post:
+        url: /sports

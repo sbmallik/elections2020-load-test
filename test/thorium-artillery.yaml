@@ -1,16 +1,20 @@
 config:
-  target: https://usatoday.com # Endpoint to performance test
+  target: https://api-stage.usatoday.com/thorium # Endpoint to performance test
   environments: # Environment the test is running
     production:
       phases:
-        - duration: 9 # The total test duration
-          arrivalRate: 3 # RPS
+        - duration: 3 # The total test duration
+          arrivalRate: 10 # RPS
 scenarios:
-  - name: usatoday-home
+  - name: homepage-summary
     flow:
     - post:
-        url: /
-  - name: usatoday-sports
+        url: /elections/results/fragments/embedHomePageSummary?electionDate=2020-11-03&site-code=USAT&includeHeader=true
+  - name: summary-bop
     flow:
     - post:
-        url: /sports
+        url: /elections/results/fragments/embedSummaryBOP?electionDate=2020-11-03&site-code=USAT&includeHeader=true
+  - name: key-races
+    flow:
+    - post:
+        url: /elections/results/fragments/keyRaces?electionDate=2020-11-03&site-code=PIND

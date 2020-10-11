@@ -9,8 +9,8 @@
     "getSecret": "vault read -field=key secret/quality-engineering/gcp/production/service-accounts/api-services-faas-artillery > keys/service-account.json",
     "pullImage": "docker pull quay.io/gannett/faas-artillery:latest",
     "build": "npm ci",
-    "test": "docker run --rm -v $(pwd)/keys:/keys -v $(pwd)/test:/test -e GOOGLE_APPLICATION_CREDENTIALS=/keys/service-account.json quay.io/gannett/faas-artillery:latest run --dir /test --config /test/thorium-artillery-config.yaml",
-    "localTest": "artillery run ./test/sample-artillery.yaml -e production"
+    "test": "docker run --rm -v $(pwd)/keys:/keys -v $(pwd)/test:/test -e GOOGLE_APPLICATION_CREDENTIALS=/keys/service-account.json -e TAAPI_API_KEY=$(echo $TAAPI_API_KEY) quay.io/gannett/faas-artillery:latest run --dir /test --config /test/thorium-artillery-config.yaml",
+    "localTest": "artillery run ./test/thorium-artillery.yaml -e production"
   },
   "repository": {
     "type": "git",
